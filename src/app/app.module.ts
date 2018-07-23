@@ -18,12 +18,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 
+import { CompletePipe } from './pipes/complete.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    CompletePipe
   ],
   imports: [
     BrowserModule,

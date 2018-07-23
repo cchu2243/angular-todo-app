@@ -4,31 +4,37 @@
 
 <mat-card class="card" >
     <mat-tab-group class="main">
-      <mat-tab label={{tab_1}}>
+      <mat-tab [label]="tab_1">
         <br>
           <mat-form-field>
-            <mat-label> New To-Do </mat-label>
-                <input matInput [(ngModel)]="toDoText" placeholder="Another chore?" value={{toDoText}}/>
+            <mat-label>New To-Do</mat-label>
+                <input matInput [(ngModel)]="toDoText" placeholder="Another chore?" />
           </mat-form-field>
             <button mat-raised-button (click)="newToDo()">Submit</button>
 
-          <mat-selection-list>
-            <mat-list-option *ngFor="let selectedToDo of toDoList" (click)="removeToDo(selectedToDo)"
-            (dblclick)="editToDo()"> {{selectedToDo?.text}}
-            </mat-list-option>
-          </mat-selection-list>
+
+          <div class="todo-list">
+            <div class="todo-list-item" *ngFor="let todo of toDoList | isComplete:false">
+              <div class="todo-list-item-text">{{ todo?.text }}</div>
+
+              <button class="todo-list-item-edit-button" mat-icon-button><mat-icon>edit</mat-icon></button>
+
+              <button class="todo-list-item-complete-button"
+                      (click)="markTodoComplete(todo)"
+                      mat-icon-button><mat-icon>check</mat-icon></button>
+            </div>
+          </div>
       </mat-tab>
 
-      <mat-tab label={{tab_2}}>
+      <mat-tab [label]="tab_2">
         <mat-list>
-          <mat-list-item *ngFor="let completedToDo of completedToDos">{{completedToDo?.text}}
-            <mat-icon>check</mat-icon>
-          </mat-list-item>
+          <mat-list-item *ngFor="let todo of toDoList | isComplete">{{todo?.text}}<mat-icon>check</mat-icon></mat-list-item>
         </mat-list>
       </mat-tab>
     </mat-tab-group>
 </mat-card>
 
 <div class="footer">
-  Completed To-dos: {{completedToDos.length}} <br> To-dos Left: {{toDoList.length}}
+  Completed To-dos: {{(toDoList | isComplete).length}} <br> To-dos Left: {{(toDoList | isComplete:false).length}}<br />
+  Ratio: {{(toDoList | isComplete).length / toDoList.length | number:'1.0-2'}}
 </div>

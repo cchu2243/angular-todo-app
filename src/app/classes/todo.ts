@@ -1,9 +1,7 @@
 export class Todo {
-  id: number;
-  text: string;
+  public readonly id: string;
 
-  constructor(id, text){
-    this.id = id;
-    this.text = text;
+  constructor(public text: string, public complete: boolean = false){
+    this.id = Date.now().toString(36);
   }
 }
