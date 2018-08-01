@@ -1,0 +1,19 @@
+.todo-item  {
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+	padding: 1px 4px;
+}
+
+.todo-item:hover {
+	background-color: #eee;
+}
+
+.todo-item > * {
+	flex: 0 0 auto;
+}
+
+.todo-item > .todo-list-item-text {
+	flex: 1 1 auto;
+	text-align: left;
+}

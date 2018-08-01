@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { Todo } from '../classes/todo';
 
 const TODOS_STORAGE_IDENTIFIER = "storedTodos";
@@ -10,7 +10,6 @@ const TODOS_STORAGE_IDENTIFIER = "storedTodos";
 })
 export class TodoListComponent implements OnInit {
   toDoText: string = "";
-
   tab_1: string = "To Be Completed";
   tab_2: string = "Completed";
 

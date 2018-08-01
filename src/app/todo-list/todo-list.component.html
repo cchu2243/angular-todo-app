@@ -1,29 +1,18 @@
 <div class="header">
-  to-dos
+  todos
 </div>
 
 <mat-card class="card" >
     <mat-tab-group class="main">
-      <mat-tab [label]="tab_1">
-        <br>
+      <mat-tab [label]="tab_1"><br>
           <mat-form-field>
             <mat-label>New To-Do</mat-label>
                 <input matInput [(ngModel)]="toDoText" placeholder="Another chore?" />
           </mat-form-field>
             <button mat-raised-button (click)="newToDo()">Submit</button>
-
-
-          <div class="todo-list">
-            <div class="todo-list-item" *ngFor="let todo of toDoList | isComplete:false">
-              <div class="todo-list-item-text">{{ todo?.text }}</div>
-
-              <button class="todo-list-item-edit-button" mat-icon-button><mat-icon>edit</mat-icon></button>
-
-              <button class="todo-list-item-complete-button"
-                      (click)="markTodoComplete(todo)"
-                      mat-icon-button><mat-icon>check</mat-icon></button>
-            </div>
-          </div>
+            <app-todo-item *ngFor = "let todo of toDoList | isComplete:false"
+                            [todo]="todo"
+                             ></app-todo-item>
       </mat-tab>
 
       <mat-tab [label]="tab_2">
@@ -36,5 +25,4 @@
 
 <div class="footer">
   Completed To-dos: {{(toDoList | isComplete).length}} <br> To-dos Left: {{(toDoList | isComplete:false).length}}<br />
-  Ratio: {{(toDoList | isComplete).length / toDoList.length | number:'1.0-2'}}
 </div>

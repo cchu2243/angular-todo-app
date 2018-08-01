@@ -22,27 +22,3 @@
   font-size: 8pt;
   color: rgba(78, 73, 212, 0.76);
 }
-
-.todo-list {
-
-}
-
-.todo-list > .todo-list-item {
-	display: flex;
-	align-items: center;
-	border-radius: 3px;
-	padding: 1px 4px;
-}
-
-.todo-list > .todo-list-item:hover {
-	background-color: #eee;
-}
-
-.todo-list > .todo-list-item > * {
-	flex: 0 0 auto;
-}
-
-.todo-list > .todo-list-item > .todo-list-item-text {
-	flex: 1 1 auto;
-	text-align: left;
-}
