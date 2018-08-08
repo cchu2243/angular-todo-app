@@ -2,9 +2,9 @@
   <div class="todo-list-item-text">{{ todo?.text }}</div>
 
   <button class="todo-list-item-edit-button" mat-icon-button
-          (click)="editTodo(todo)" ><mat-icon>edit</mat-icon></button>
+          (click)="checkEdit(todo)" ><mat-icon>edit</mat-icon></button>
 
   <button class="todo-list-item-complete-button"
           mat-icon-button
-          (click)="markTodoComplete(todo)"><mat-icon>check</mat-icon></button>
+          (click)="checkComplete(todo)"><mat-icon>check</mat-icon></button>
 </div>

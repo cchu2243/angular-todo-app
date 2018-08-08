@@ -9,7 +9,8 @@ import { TodoListComponent } from '../todo-list/todo-list.component';
 })
 export class TodoItemComponent implements OnInit {
    @Input() todo: any;
-   @Output() complete: EventEmitter<Todo> = new EventEmitter<Todo>();
+   @Input() edit: boolean;
+   @Output() onComplete: EventEmitter<Todo> = new EventEmitter<Todo>();
    @Output() onEdit: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   constructor() { }
@@ -17,11 +18,12 @@ export class TodoItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  markTodoComplete(todo: Todo){
-    this.complete.emit(todo);
+  checkComplete(todo: Todo){
+    console.log(todo);
+    this.onComplete.emit(todo);
   }
 
-  editTodo(todo: Todo){
+  checkEdit(todo: Todo){
     this.onEdit.emit(todo);
   }
 

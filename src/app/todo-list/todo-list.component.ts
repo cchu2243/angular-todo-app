@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Todo } from '../classes/todo';
+import { TodoService } from '../services/todo.service';
 
-const TODOS_STORAGE_IDENTIFIER = "storedTodos";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,30 +14,29 @@ export class TodoListComponent implements OnInit {
   tab_1: string = "To Be Completed";
   tab_2: string = "Completed";
 
-  toDoList: Todo[];
+  edit: boolean = false;
 
-  constructor() {
-    this.toDoList = JSON.parse(localStorage.getItem(TODOS_STORAGE_IDENTIFIER)) || [];
+  todos$: Observable<Todo[]>;
+
+  constructor(private _todoService: TodoService) {
   }
 
   ngOnInit() {
+    this.todos$ = this._todoService.getTodoList();
   }
 
   newToDo(): void {
-    const nextTodo = new Todo(this.toDoText);
-    this.toDoList.push(nextTodo);
-    this._updateLocalStorage();
+    this._todoService.addTodo(new Todo(this.toDoText));
     this.toDoText = "";
-    console.log(nextTodo);
   }
 
   markTodoComplete(todo: Todo): void {
     todo.complete = true;
-    this._updateLocalStorage();
+
   }
 
-  private _updateLocalStorage(): void {
-    localStorage.setItem(TODOS_STORAGE_IDENTIFIER, JSON.stringify(this.toDoList));
+  editTodo(todo: Todo): void{
+    todo.edit = true;
   }
 
 }
