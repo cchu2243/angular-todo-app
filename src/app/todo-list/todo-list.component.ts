@@ -14,9 +14,7 @@ export class TodoListComponent implements OnInit {
   tab_1: string = "To Be Completed";
   tab_2: string = "Completed";
 
-  edit: boolean = false;
-
-  todos$: Observable<Todo[]>;
+  todos$: Observable<any>;
 
   constructor(private _todoService: TodoService) {
   }
@@ -30,13 +28,8 @@ export class TodoListComponent implements OnInit {
     this.toDoText = "";
   }
 
-  markTodoComplete(todo: Todo): void {
-    todo.complete = true;
-
-  }
-
-  editTodo(todo: Todo): void{
-    todo.edit = true;
-  }
+  handleTodoChange(todo: Todo): void {
+    this._todoService.saveTodo(todo);
+  }=
 
 }

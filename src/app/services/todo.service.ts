@@ -9,20 +9,26 @@ const TODOS_STORAGE_IDENTIFIER = "storedTodos";
   providedIn: 'root'
 })
 export class TodoService {
-  private _todos: Todo[] = [];
+  private _todos: any;
 
   constructor() {
-    this._todos = JSON.parse(localStorage.getItem(TODOS_STORAGE_IDENTIFIER)).map(todo => {
-      return new Todo(todo);
-    });
+    this._todos = JSON.parse(localStorage.getItem(TODOS_STORAGE_IDENTIFIER)) || {};
+
+    // this._map = JSON.parse(localStorage.getItem(TODOS_STORAGE_IDENTIFIER));
+
   }
 
-  getTodoList() : Observable<Todo[]> {
+  getTodoList() : Observable<any> {
     return of(this._todos);
   }
 
   addTodo(todo: Todo) {
-    this._todos.push(todo);
+    this._todos[todo.id] = todo;
+    localStorage.setItem(TODOS_STORAGE_IDENTIFIER, JSON.stringify(this._todos));
+  }
+
+  saveTodo(todo: Todo) {
+    this._todos[todo.id] = todo;
     localStorage.setItem(TODOS_STORAGE_IDENTIFIER, JSON.stringify(this._todos));
   }
 }

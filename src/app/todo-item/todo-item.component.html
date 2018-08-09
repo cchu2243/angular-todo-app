@@ -1,10 +1,21 @@
 <div class="todo-item">
-  <div class="todo-list-item-text">{{ todo?.text }}</div>
 
-  <button class="todo-list-item-edit-button" mat-icon-button
-          (click)="checkEdit(todo)" ><mat-icon>edit</mat-icon></button>
+  <div *ngIf="!isEditing" class="todo-list-item-text">{{ todo?.text }}</div>
+  <input *ngIf="isEditing" type="text" [(ngModel)]="todo.text">
 
-  <button class="todo-list-item-complete-button"
+  <button *ngIf="isEditing"
+          class="todo-list-item-complete-button"
           mat-icon-button
-          (click)="checkComplete(todo)"><mat-icon>check</mat-icon></button>
+          (click)="isEditing = false; emitTodo()"><mat-icon>check</mat-icon></button>
+
+  <button *ngIf="!isEditing"
+          class="todo-list-item-edit-button"
+          mat-icon-button
+          (click)="isEditing = true" ><mat-icon>edit</mat-icon></button>
+
+  <button *ngIf="!isEditing"
+          class="todo-list-item-complete-button"
+          mat-icon-button
+          (click)="todo.complete = true; emitTodo()"><mat-icon>check</mat-icon></button>
+
 </div>

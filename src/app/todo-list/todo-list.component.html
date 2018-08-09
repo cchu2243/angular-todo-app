@@ -13,9 +13,7 @@
             <button mat-raised-button (click)="newToDo()">Submit</button>
             <app-todo-item *ngFor = "let todo of todos$ | async | isComplete:false"
                             [todo]="todo"
-                            [edit]="edit"
-                            (onComplete)="markTodoComplete($event)"
-                            (onEdit)="editTodo($event)"></app-todo-item>
+                            (onTodoChange)="handleTodoChange($event)"></app-todo-item>
       </mat-tab>
 
       <mat-tab [label]="tab_2">
