@@ -5,20 +5,21 @@
 <mat-card class="card" >
     <mat-tab-group>
 
-      <mat-tab [label]="tab_1"><br>
+      <mat-tab [label]="tab_1">
           <mat-form-field>
             <mat-label>New To-Do</mat-label>
-                <input matInput [(ngModel)]="toDoText" placeholder="Another chore?" />
+            <input matInput [(ngModel)]="toDoText" placeholder="Another chore?" />
           </mat-form-field>
-            <button mat-raised-button (click)="newToDo()">Submit</button>
-            <app-todo-item *ngFor = "let todo of todos$ | async | isComplete:false"
-                            [todo]="todo"
-                            (onTodoChange)="handleTodoChange($event)"></app-todo-item>
+          <button mat-raised-button (click)="newToDo()">Submit</button>
+          <app-todo-item *ngFor = "let todo of todos"
+                         [@slideInOut] 
+                         [todo]="todo"
+                         (onTodoChange)="handleTodoChange($event)"></app-todo-item>
       </mat-tab>
 
       <mat-tab [label]="tab_2">
         <mat-list>
-          <mat-list-item *ngFor="let todo of todos$ | async | isComplete">{{todo?.text}}<mat-icon>check</mat-icon></mat-list-item>
+          <mat-list-item *ngFor="let todo of completeTodos">{{todo?.text}}<mat-icon>check</mat-icon></mat-list-item>
         </mat-list>
       </mat-tab>
 
@@ -26,5 +27,5 @@
 </mat-card>
 
 <div class="footer">
-  Completed To-dos: {{(toDoList | isComplete)?.length}} <br> To-dos Left: {{(toDoList | isComplete:false)?.length}}<br/>
+  Completed Todos: {{(todos | isComplete)?.length}} <br> Todos Left: {{(todos | isComplete:false)?.length}}<br/>
 </div>

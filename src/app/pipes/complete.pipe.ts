@@ -9,7 +9,7 @@ import { Todo } from '../classes/todo';
 export class CompletePipe implements PipeTransform {
 
   transform(value: any, complete: boolean = true): any {
-    return !!value ? Object.values(value).filter(item => {
+    return !!value ? value.filter(item => {
       return item.complete == complete;
     })
     : null;
