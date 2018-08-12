@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Todo } from '../classes/todo';
 import { TodoService } from '../services/todo.service';
-import { trigger, transition, animate, style, query, state } from '@angular/animations'
+import { trigger, transition, animate, style, query, state, keyframes } from '@angular/animations'
 import { Observable } from 'rxjs';
 
 @Component({
