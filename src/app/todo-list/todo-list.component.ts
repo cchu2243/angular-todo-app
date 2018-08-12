@@ -9,11 +9,17 @@ import { Observable } from 'rxjs';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css'],
   animations: [
-    trigger('slideInOut', [
-      transition('void => *', [
-        style({transform: 'translateX(-100%)'}), animate('200ms ease-in',
-        style({transform: 'translateX(0%)'}))
-        ])
+    trigger('frameEnter', [
+      transition(':enter', [
+        style({transform: 'translateY(-100%)'}),
+        animate('400ms ease-in', style({transform: 'translateY(0%)'}))
+      ])
+    ]),
+    trigger('listEnter', [
+      transition('* => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate('400ms ease-in', style({transform: 'translateX(0%)'}))
+      ])
     ])
   ]
 })
@@ -34,11 +40,10 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
     this._todoSubscription = this._todoService.todos.subscribe(todoKV => {
       const allTodos = Object.values(todoKV);
-      console.log(allTodos.filter(todo => !todo.complete));
       this.todos = allTodos.filter(todo => !todo.complete);
-      console.log(this.todos);
-      // this.completeTodos = allTodos.filter(todo => todo.complete);
+      this.completeTodos = allTodos.filter(todo => todo.complete);
     });
+    console.log(this.todos);
   }
 
   ngOnDestroy() {
@@ -48,6 +53,7 @@ export class TodoListComponent implements OnInit {
   }
 
   newToDo(): void {
+    console.log(this.todos.length);
     this._todoService.setTodo(new Todo(this.toDoText));
     this.toDoText = "";
   }

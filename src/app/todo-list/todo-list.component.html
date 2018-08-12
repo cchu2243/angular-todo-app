@@ -1,8 +1,8 @@
-<div class="header">
+<div [@frameEnter] class="header">
   todos
 </div>
 
-<mat-card class="card" >
+<mat-card [@frameEnter] class="card" >
     <mat-tab-group>
 
       <mat-tab [label]="tab_1">
@@ -11,10 +11,11 @@
             <input matInput [(ngModel)]="toDoText" placeholder="Another chore?" />
           </mat-form-field>
           <button mat-raised-button (click)="newToDo()">Submit</button>
-          <app-todo-item *ngFor = "let todo of todos"
-                         [@slideInOut] 
-                         [todo]="todo"
-                         (onTodoChange)="handleTodoChange($event)"></app-todo-item>
+          <div [@listEnter]="todos.length">
+            <app-todo-item   *ngFor = "let todo of todos"
+                             [todo]="todo"
+                             (onTodoChange)="handleTodoChange($event)"></app-todo-item>
+          </div>
       </mat-tab>
 
       <mat-tab [label]="tab_2">
@@ -27,5 +28,5 @@
 </mat-card>
 
 <div class="footer">
-  Completed Todos: {{(todos | isComplete)?.length}} <br> Todos Left: {{(todos | isComplete:false)?.length}}<br/>
+  Completed Todos: {{completeTodos.length}} <br> Todos Left: {{(todos | isComplete:false)?.length}}<br/>
 </div>
