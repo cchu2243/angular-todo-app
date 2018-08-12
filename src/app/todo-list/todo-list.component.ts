@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Todo } from '../classes/todo';
 import { TodoService } from '../services/todo.service';
-import { trigger, transition, animate, style, query } from '@angular/animations'
+import { trigger, transition, animate, style, query, state } from '@angular/animations'
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,13 +12,20 @@ import { Observable } from 'rxjs';
     trigger('frameEnter', [
       transition(':enter', [
         style({transform: 'translateY(-100%)'}),
-        animate('400ms ease-in', style({transform: 'translateY(0%)'}))
+        animate('600ms ease-in', style({transform: 'translateY(0%)'}))
+      ])
+    ]),
+    trigger('simpleFadeAnimation', [
+      state('in', style({opacity: 1})),
+      transition(':enter', [
+        style({opacity: 0}),
+        animate('1200ms' )
       ])
     ]),
     trigger('listEnter', [
       transition('* => *', [
-        style({transform: 'translateX(-100%)'}),
-        animate('400ms ease-in', style({transform: 'translateX(0%)'}))
+        style({transform: 'translateY(-100%)'}),
+        animate('500ms ease-in', style({transform: 'translateY(0%)'}))
       ])
     ])
   ]
