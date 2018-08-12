@@ -5,13 +5,15 @@ import { of } from 'rxjs';
 
 const TODOS_STORAGE_IDENTIFIER = "storedTodos";
 
+interface ITodoMap { [s: string]: Todo; }
+
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private _todos: any;
-  private _todoSubject: BehaviorSubject<any> = new BehaviorSubject({});
-  public readonly todos: Observable<any> = this._todoSubject.asObservable();
+  private _todos: ITodoMap = {};
+  private _todoSubject: BehaviorSubject<ITodoMap> = new BehaviorSubject({});
+  public readonly todos: Observable<ITodoMap> = this._todoSubject.asObservable();
 
   constructor() {
     this._todos = JSON.parse(localStorage.getItem(TODOS_STORAGE_IDENTIFIER)) || {};
